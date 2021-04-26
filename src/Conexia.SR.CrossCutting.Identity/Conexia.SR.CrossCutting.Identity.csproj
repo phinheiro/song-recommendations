@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210425212752_InitialIdentity.cs" />
+    <Compile Remove="Migrations\20210425212752_InitialIdentity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore.identity.entityframeworkcore" Version="3.1.10" />
+    <PackageReference Include="microsoft.aspnetcore.identity.ui" Version="3.1.10" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Conexia.SR.Application\Conexia.SR.Application.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>9601e0c0-2239-4dcf-90b0-4fb4c8ab58c1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Conexia.SR.Application\Conexia.SR.Application.csproj" />
+    <ProjectReference Include="..\Conexia.SR.CrossCutting.Identity\Conexia.SR.CrossCutting.Identity.csproj" />
+    <ProjectReference Include="..\Conexia.SR.Data\Conexia.SR.Data.csproj" />
+    <ProjectReference Include="..\Conexia.SR.Domain\Conexia.SR.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="automapper.extensions.microsoft.dependencyinjection" Version="8.1.1" />
+    <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="3.1.10" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.10" />
+    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+  </ItemGroup>
+
+
+</Project>
