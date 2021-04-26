@@ -1,9 +1,6 @@
-using Conexia.SR.Application.AutoMapper;
-using Conexia.SR.Data;
 using Conexia.SR.WebAPI.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +26,8 @@ namespace Conexia.SR.WebAPI
 
             services.AddAutoMapperSetup();
 
+            services.AddSwaggerSetup();
+
             services.RegisterServices();
         }
 
@@ -46,6 +45,8 @@ namespace Conexia.SR.WebAPI
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseSwaggerSetup();
 
             app.UseEndpoints(endpoints =>
             {
