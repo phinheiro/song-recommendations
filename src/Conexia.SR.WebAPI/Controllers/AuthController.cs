@@ -76,6 +76,34 @@ namespace Conexia.SR.WebAPI.Controllers
             return BadRequest("User or password incorrect");
         }
 
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel viewmodel)
+        {
+            var user = await _userManager.FindByEmailAsync(viewmodel.Email);
+
+            if (user == null) return BadRequest("User not found");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            return Ok(new { id = user.Id, token });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromQuery] Guid userId, 
+                                                       [FromQuery] string token, 
+                                                       [FromBody] ResetPasswordViewModel viewmodel)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.ResetPasswordAsync(user, token, viewmodel.Password);
+
+            if (result.Succeeded)
+            {
+                return Ok("Password was successfully changed");
+            }
+
+            return BadRequest(result.Errors.SelectMany(e => e.Description));
+        }
+
         private async Task<string> GenerateJWT(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
