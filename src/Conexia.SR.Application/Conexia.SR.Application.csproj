@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="automapper" Version="10.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Conexia.SR.Domain\Conexia.SR.Domain.csproj" />
+    <ProjectReference Include="..\Conexia.SR.ExternalServices\Conexia.SR.ExternalServices.csproj" />
   </ItemGroup>
 
 </Project>

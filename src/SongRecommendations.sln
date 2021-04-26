@@ -17,12 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conexia.SR.Application", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conexia.SR.WebAPI", "Conexia.SR.WebAPI\Conexia.SR.WebAPI.csproj", "{B53C88E3-9432-4DFB-9188-9F099ADFFE1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conexia.SR.CrossCutting.Identity", "Conexia.SR.CrossCutting.Identity\Conexia.SR.CrossCutting.Identity.csproj", "{E7021934-956C-46C9-B23F-531A683C5D61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conexia.SR.CrossCutting.Identity", "Conexia.SR.CrossCutting.Identity\Conexia.SR.CrossCutting.Identity.csproj", "{E7021934-956C-46C9-B23F-531A683C5D61}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB8F37FD-DBD7-48CB-B6D0-94A2CA6CC4FF}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conexia.SR.ExternalServices", "Conexia.SR.ExternalServices\Conexia.SR.ExternalServices.csproj", "{DBAFAD84-CAA9-4E7B-9CB6-CF7B793A5BA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{E7021934-956C-46C9-B23F-531A683C5D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7021934-956C-46C9-B23F-531A683C5D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7021934-956C-46C9-B23F-531A683C5D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBAFAD84-CAA9-4E7B-9CB6-CF7B793A5BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBAFAD84-CAA9-4E7B-9CB6-CF7B793A5BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBAFAD84-CAA9-4E7B-9CB6-CF7B793A5BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBAFAD84-CAA9-4E7B-9CB6-CF7B793A5BA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

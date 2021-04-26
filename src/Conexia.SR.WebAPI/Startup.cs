@@ -1,3 +1,4 @@
+using Conexia.SR.ExternalServices.Settings;
 using Conexia.SR.WebAPI.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,9 @@ namespace Conexia.SR.WebAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            WeatherApiSettings.ApiKey = Configuration["WeatherApiKey"];
+            SpotifyApiSettings.ClientId = Configuration["SpotifySettings:ClientId"];
+            SpotifyApiSettings.SecretId = Configuration["SpotifySettings:ClientSecret"];
         }
 
         public IConfiguration Configuration { get; }
