@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Conexia.SR.WebAPI.Configurations
 {
@@ -30,6 +32,10 @@ namespace Conexia.SR.WebAPI.Configurations
                             Url = new Uri("https://www.linkedin.com/in/phinheiro/")
                         }
                     });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
         }
 

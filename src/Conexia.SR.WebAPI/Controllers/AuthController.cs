@@ -3,6 +3,7 @@ using Conexia.SR.CrossCutting.Identity.ViewModels;
 using Conexia.SR.WebAPI.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -30,6 +31,24 @@ namespace Conexia.SR.WebAPI.Controllers
             _jwtSettings = jwtSettings.Value;
         }
 
+        /// <summary>
+        /// Creates a new user
+        /// </summary>
+        /// <param name="registerUser"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /api/auth/register
+        ///     
+        ///     {
+        ///         "name": "Pedro",
+        ///         "email": "pedro@email.com",
+        ///         "hometown": "Araguaina",
+        ///         "password": "Teste@123",
+        ///         "confirmPassword": "Teste@123"
+        ///     }
+        /// </remarks>
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel registerUser)
         {
@@ -49,12 +68,27 @@ namespace Conexia.SR.WebAPI.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return Ok(await GenerateJWT(user.Email));
+                return Ok(new { Token = await GenerateJWT(user.Email) });
             }
 
             return BadRequest(result.Errors.SelectMany(e => e.Description));
         }
 
+        /// <summary>
+        /// Login an user with email and password
+        /// </summary>
+        /// <param name="loginUser"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /api/auth/login
+        ///     
+        ///     {
+        ///         "email": "pedro@email.com",
+        ///         "password": "Teste@123"
+        ///     }
+        /// </remarks>
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser(LoginUserViewModel loginUser)
         {
@@ -75,7 +109,20 @@ namespace Conexia.SR.WebAPI.Controllers
 
             return BadRequest("User or password incorrect");
         }
-
+        /// <summary>
+        /// Get a reset token for the specified email
+        /// </summary>
+        /// <param name="viewmodel"></param>
+        /// <returns></returns>
+        /// /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /api/auth/forgot-password
+        ///     
+        ///     {
+        ///         "email": "pedro@email.com",
+        ///     }
+        /// </remarks>
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel viewmodel)
         {
@@ -88,6 +135,24 @@ namespace Conexia.SR.WebAPI.Controllers
             return Ok(new { id = user.Id, token });
         }
 
+        /// <summary>
+        /// Reset user password
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="token"></param>
+        /// <param name="viewmodel"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// On url, pass the userId and token from forgot-password route
+        /// Sample request:
+        /// 
+        ///     POST /api/auth/reset-password
+        ///     
+        ///     {
+        ///         "password": "Key@1234",
+        ///         "confirmPassword": "Key@1234"
+        ///     }
+        /// </remarks>
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromQuery] Guid userId, 
                                                        [FromQuery] string token, 

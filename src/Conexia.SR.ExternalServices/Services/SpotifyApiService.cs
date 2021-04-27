@@ -42,7 +42,7 @@ namespace Conexia.SR.ExternalServices.Services
 
         public async Task<PlaylistsRootViewModel> GetPlaylists(string category, string accessToken)
         {
-            var action = $"{_baseUrl}/browse/categories/{category}/playlists?limit=5";
+            var action = $"{_baseUrl}/browse/categories/{category}/playlists";
 
             using (var httpClient = new HttpClient())
             {

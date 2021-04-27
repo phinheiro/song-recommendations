@@ -2,6 +2,7 @@
 using Conexia.SR.Application.ViewModels.PersonalNotes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.JsonWebTokens;
 using System;
 using System.Linq;
@@ -16,14 +17,17 @@ namespace Conexia.SR.WebAPI.Controllers
     public class PersonalNotesController : ControllerBase
     {
         private readonly IPersonalNoteAppService _noteService;
-        public PersonalNotesController(IPersonalNoteAppService noteService)
+        private readonly ILogger _logger;
+        public PersonalNotesController(IPersonalNoteAppService noteService, ILogger<PersonalNotesController> logger)
         {
             _noteService = noteService;
+            _logger = logger;
         }
 
-        [HttpGet("teste")]
-        public IActionResult Teste() => Ok("Sucesso");
-
+        /// <summary>
+        /// Retrieves all personal notes related to the logged user
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetNotes()
         {
@@ -31,6 +35,11 @@ namespace Conexia.SR.WebAPI.Controllers
             return Ok(notes);
         }
 
+        /// <summary>
+        /// Get a personal note with the specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetNote(Guid id)
         {
@@ -38,6 +47,21 @@ namespace Conexia.SR.WebAPI.Controllers
             return Ok(note);
         }
 
+        /// <summary>
+        /// Creates a personal note
+        /// </summary>
+        /// <param name="noteViewModel"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /api/personalnotes
+        ///     
+        ///     {
+        ///         "title": "Note title",
+        ///         "body": "Note body"
+        ///     }
+        /// </remarks>
         [HttpPost]
         public async Task<IActionResult> CreatePersonalNote(PersonalNoteViewModel noteViewModel)
         {
