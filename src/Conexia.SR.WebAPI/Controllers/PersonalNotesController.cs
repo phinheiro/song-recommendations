@@ -2,10 +2,7 @@
 using Conexia.SR.Application.ViewModels.PersonalNotes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.JsonWebTokens;
 using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -17,11 +14,9 @@ namespace Conexia.SR.WebAPI.Controllers
     public class PersonalNotesController : ControllerBase
     {
         private readonly IPersonalNoteAppService _noteService;
-        private readonly ILogger _logger;
-        public PersonalNotesController(IPersonalNoteAppService noteService, ILogger<PersonalNotesController> logger)
+        public PersonalNotesController(IPersonalNoteAppService noteService)
         {
             _noteService = noteService;
-            _logger = logger;
         }
 
         /// <summary>
